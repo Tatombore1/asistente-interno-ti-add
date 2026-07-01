@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Logo cuadrado ADD</title>
+  <desc id="desc">Logo claro cuadrado de ADD con monograma y detalles tecnologicos.</desc>
+  <rect width="512" height="512" rx="96" fill="#F8FAFC"/>
+  <rect x="42" y="42" width="428" height="428" rx="78" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="8"/>
+
+  <path d="M132 326L216 128C222.2 113.4 242.8 113.4 249 128L333 326H282L264.5 280H200.5L183 326H132Z" fill="#EF3B2D"/>
+  <path d="M216 238H249L232.5 190L216 238Z" fill="#FFFFFF"/>
+
+  <path d="M338 171H383C410.6 171 433 193.4 433 221V233C433 260.6 410.6 283 383 283H338V171Z" fill="#FF9800"/>
+  <path d="M362 213H383C390.7 213 397 219.3 397 227C397 234.7 390.7 241 383 241H362V213Z" fill="#FFFFFF"/>
+
+  <circle cx="119" cy="162" r="18" fill="#FF9800"/>
+  <circle cx="119" cy="350" r="18" fill="#EF3B2D"/>
+  <circle cx="384" cy="128" r="18" fill="#EF3B2D"/>
+  <path d="M119 180V224C119 239.5 131.5 252 147 252H184" stroke="#FF9800" stroke-width="16" stroke-linecap="round"/>
+  <path d="M366 128H322C306.5 128 294 140.5 294 156V194" stroke="#EF3B2D" stroke-width="16" stroke-linecap="round"/>
+
+  <text x="256" y="402" text-anchor="middle" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="2">ADD</text>
+</svg>

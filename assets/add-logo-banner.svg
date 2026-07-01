@@ -1,0 +1,26 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Logo horizontal ADD</title>
+  <desc id="desc">Logo claro de ADD para banner web, con simbolo tecnologico y texto de asistente interno.</desc>
+  <rect width="1200" height="320" rx="44" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="1128" height="248" rx="34" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="4"/>
+
+  <g transform="translate(86 64)">
+    <rect width="192" height="192" rx="42" fill="#FFF5F0"/>
+    <path d="M58 136L91 56C93.4 50.2 101.6 50.2 104 56L137 136H116.5L109.8 118H85.2L78.5 136H58Z" fill="#EF3B2D"/>
+    <path d="M91.5 100H103.5L97.5 82.5L91.5 100Z" fill="#FFFFFF"/>
+    <path d="M143 73H159C169.5 73 178 81.5 178 92V100C178 110.5 169.5 119 159 119H143V73Z" fill="#FF9800"/>
+    <path d="M151 90H159C162.3 90 165 92.7 165 96C165 99.3 162.3 102 159 102H151V90Z" fill="#FFFFFF"/>
+    <circle cx="45" cy="60" r="9" fill="#FF9800"/>
+    <circle cx="45" cy="132" r="9" fill="#EF3B2D"/>
+    <circle cx="152" cy="48" r="9" fill="#EF3B2D"/>
+    <path d="M45 69V90C45 97.7 51.3 104 59 104H73" stroke="#FF9800" stroke-width="8" stroke-linecap="round"/>
+    <path d="M143 55H123C115.3 55 109 61.3 109 69V82" stroke="#EF3B2D" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(326 86)">
+    <text x="0" y="86" fill="#172033" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="96" font-weight="800" letter-spacing="2">ADD</text>
+    <text x="6" y="136" fill="#475569" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">Asistente Interno de TI</text>
+    <rect x="6" y="158" width="428" height="10" rx="5" fill="#EF3B2D"/>
+    <rect x="454" y="158" width="94" height="10" rx="5" fill="#FF9800"/>
+  </g>
+</svg>
