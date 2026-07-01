@@ -70,20 +70,30 @@ examples = [
     "¿Como verifico el numero de serie de una notebook?",
     "¿Como conectarse a Exchange Online desde PowerShell?",
 ]
+EXAMPLE_PLACEHOLDER = "Selecciona una pregunta..."
 selected_example = st.selectbox(
-    "Pregunta de ejemplo", ["Selecciona una pregunta..."] + examples
+    "Pregunta de ejemplo",
+    [EXAMPLE_PLACEHOLDER] + examples,
+    key="selected_example",
 )
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+if "last_example_used" not in st.session_state:
+    st.session_state.last_example_used = None
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 question = st.chat_input("Escribe una consulta operativa para el Area de TI")
-if selected_example != "Selecciona una pregunta...":
+if (
+    not question
+    and selected_example != EXAMPLE_PLACEHOLDER
+    and selected_example != st.session_state.last_example_used
+):
     question = selected_example
+    st.session_state.last_example_used = selected_example
 
 if question:
     st.session_state.messages.append({"role": "user", "content": question})
