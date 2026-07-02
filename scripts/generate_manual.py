@@ -25,7 +25,7 @@ CASES_SECTIONS = [
         "1. Alcance del documento",
         [
             "Este documento funciona como guia de consulta para analistas del Area de TI de Distribuidora ADD. Reune casos operativos frecuentes reportados por usuarios y los pasos esperados de validacion o resolucion.",
-            "El objetivo es que, ante un mensaje como Nathaly dice que no funciona su impresora o Raquel se olvido su contraseña del correo, el equipo de soporte pueda consultar rapidamente los pasos a seguir.",
+            "El objetivo es que, ante un mensaje como un usuario dice que no funciona su impresora o un usuario se olvido su contraseña del correo, el equipo de soporte pueda consultar rapidamente los pasos a seguir.",
             "La Mesa de Ayuda atiende de lunes a viernes, de 07:30 a 17:30. Los sabados se cubren incidentes operativos de deposito y facturacion de 08:00 a 12:00. Fuera de ese horario solo se gestionan incidentes criticos mediante el numero de guardia +595 981 000 120.",
         ],
     ),
@@ -40,7 +40,7 @@ CASES_SECTIONS = [
     (
         "3. Casos de contraseña de correo",
         [
-            "Si Raquel u otro usuario olvida la contraseña del correo corporativo, debe existir un ticket previo o una solicitud formal registrada. El analista de TI debe restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion.",
+            "Si un usuario olvida la contraseña del correo corporativo, debe existir un ticket previo o una solicitud formal registrada. El analista de TI debe restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion.",
             "Luego se responde el ticket con la contraseña temporal y se aclara que el sistema solicitara un cambio obligatorio al volver a ingresar.",
             "Si el usuario reporta que no recibe correos o no puede iniciar sesion despues del cambio, se debe validar el estado de la cuenta, licenciamiento y dispositivos conectados antes de escalar.",
         ],
