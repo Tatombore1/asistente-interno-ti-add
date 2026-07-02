@@ -55,3 +55,14 @@ def load_pdf(
         raise ValueError("El PDF no contiene texto extraible")
     return chunks
 
+
+def load_pdfs(
+    paths: list[str | Path], chunk_size: int = 1100, overlap: int = 180
+) -> list[DocumentChunk]:
+    all_chunks: list[DocumentChunk] = []
+    for path in paths:
+        all_chunks.extend(load_pdf(path, chunk_size=chunk_size, overlap=overlap))
+
+    if not all_chunks:
+        raise ValueError("No se encontraron documentos con texto extraible")
+    return all_chunks

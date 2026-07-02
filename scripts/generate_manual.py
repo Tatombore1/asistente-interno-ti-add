@@ -16,104 +16,99 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "data" / "procedimientos_y_guias_soporte_ti_distribuidora_add.pdf"
+DATA_DIR = ROOT / "data"
+CASES_OUTPUT = DATA_DIR / "casos_operativos_soporte_ti_add.pdf"
+TOOLS_OUTPUT = DATA_DIR / "herramientas_y_administracion_ti_add.pdf"
 
-SECTIONS = [
+CASES_SECTIONS = [
     (
-        "1. Objetivo y alcance",
+        "1. Alcance del documento",
         [
-            "Este documento establece los procedimientos del Area de TI de Distribuidora ADD y funciona como base operativa de consulta para el equipo de soporte. Reune indicaciones para atencion a usuarios, gestion de accesos y resolucion de incidentes frecuentes.",
-            "Aplica a personal administrativo, fuerza de ventas, deposito, logistica y sucursales que utilizan equipos, cuentas, sistemas o conectividad provistos por la empresa.",
+            "Este documento funciona como guia de consulta para analistas del Area de TI de Distribuidora ADD. Reune casos operativos frecuentes reportados por usuarios y los pasos esperados de validacion o resolucion.",
+            "El objetivo es que, ante un mensaje como Nathaly dice que no funciona su impresora o Raquel se olvido su contraseña del correo, el equipo de soporte pueda consultar rapidamente los pasos a seguir.",
             "La Mesa de Ayuda atiende de lunes a viernes, de 07:30 a 17:30. Los sabados se cubren incidentes operativos de deposito y facturacion de 08:00 a 12:00. Fuera de ese horario solo se gestionan incidentes criticos mediante el numero de guardia +595 981 000 120.",
-            "Los canales oficiales son el correo soporte.ti@distribuidoraadd.example y el interno 120. Los pedidos enviados por WhatsApp personal o por mensajes informales no se registran como tickets.",
         ],
     ),
     (
-        "2. Registro y prioridad de tickets",
+        "2. Casos de acceso a carpetas, sistemas y red",
+        [
+            "Si un usuario informa que no abre una carpeta compartida o no accede al sistema, primero se debe validar si esta fuera de la empresa o dentro de la red interna. Si esta fuera, verificar que se encuentre conectado a la VPN. Si esta dentro, verificar que tenga conexion a Internet.",
+            "Luego se debe ingresar a Panel de control, Conexiones, y revisar la configuracion de DNS de la interfaz activa. En la conexion por cable de red o en la de Wi-Fi, segun corresponda, la direccion DNS primaria debe ser 192.0.2.4 y como secundaria debe figurar 198.51.100.136 o 203.0.113.8.",
+            "Si el usuario continua sin acceder al recurso, se debe validar si el problema ocurre con una sola carpeta, con varias o con todo acceso a red. Esa distincion define si se revisan permisos, conectividad o autenticacion.",
+        ],
+    ),
+    (
+        "3. Casos de contraseña de correo",
+        [
+            "Si Raquel u otro usuario olvida la contraseña del correo corporativo, debe existir un ticket previo o una solicitud formal registrada. El analista de TI debe restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion.",
+            "Luego se responde el ticket con la contraseña temporal y se aclara que el sistema solicitara un cambio obligatorio al volver a ingresar.",
+            "Si el usuario reporta que no recibe correos o no puede iniciar sesion despues del cambio, se debe validar el estado de la cuenta, licenciamiento y dispositivos conectados antes de escalar.",
+        ],
+    ),
+    (
+        "4. Casos de contraseña de SGI",
+        [
+            "Si un usuario olvida la contraseña del sistema SGI, soporte debe indicarle que ingrese a la pantalla de acceso del sistema y seleccione la opcion Olvide mi contrasena. El sistema enviara automaticamente por correo una contrasena temporal.",
+            "La contrasena temporal de SGI permite volver a ingresar al sistema y obliga a definir una nueva contraseña antes de continuar.",
+            "Si el usuario no recibe el correo de recuperacion, se debe revisar primero el acceso al correo antes de escalar el caso a administracion funcional de SGI.",
+        ],
+    ),
+    (
+        "5. Casos de impresoras y perifericos",
+        [
+            "Si Nathaly o cualquier usuario indica que no funciona una impresora, primero se debe identificar la impresora correcta y verificar su direccion IP en el archivo Excel de la compartida de Informatica.",
+            "Luego se debe hacer ping a la IP de la impresora. Si responde, se puede desinstalar la impresora del equipo del usuario y volver a instalarla utilizando los drivers que se encuentran organizados por impresora en la compartida.",
+            "Si la impresora no responde al ping, se debe validar alimentacion, red fisica y estado del equipo antes de escalar a infraestructura o proveedor.",
+        ],
+    ),
+    (
+        "6. Casos de VPN y trabajo remoto",
+        [
+            "Si un usuario informa que no funciona la VPN, primero se debe validar Internet, fecha y hora del equipo y reiniciar Sophos Connect. Si persiste, registrar el codigo de error y confirmar que utilice su usuario de dominio en formato nombre.apellido junto con la misma contraseña con la que inicia sesion en su notebook.",
+            "Si la VPN requiere reprovision, TI puede ingresar a 198.51.100.252:4443 con las credenciales de dominio del usuario, descargar el archivo .ovpn correspondiente y ejecutarlo en la notebook del usuario para volver a configurar la conexion.",
+            "La VPN corporativa se utiliza exclusivamente desde equipos administrados por Distribuidora ADD. Si un usuario consulta por equipos personales, soporte debe indicar que no esta permitido salvo autorizacion formal y uso del acceso web aprobado.",
+        ],
+    ),
+    (
+        "7. Apertura y calidad de tickets",
         [
             "La plataforma interna de tickets se encuentra en http://192.0.2.7:8081/ticket/scp/login.php. Si la persona se encuentra fuera de la oficina, primero debe conectarse a la VPN para poder ingresar.",
-            "El formato de acceso a la plataforma es Usuario A.nombre.apellido y contrasena inicial nombre.apellido. La contrasena puede cambiarse posteriormente desde la configuracion del sistema.",
-            "Para crear un ticket se debe ingresar a la opcion Nuevo Ticket, buscar al usuario correcto y completar los datos de seguimiento. En el campo CC se pueden agregar correos para dar visibilidad y en Aviso de Ticket debe quedar la opcion Alertar a todos.",
             "Todo ticket debe incluir nombre, sector, sucursal o deposito afectado, equipo o sistema involucrado, descripcion del problema, hora aproximada de inicio, mensaje de error y foto o captura cuando sea posible. Nunca deben adjuntarse contraseñas.",
-            "En la carga del ticket se debe dejar Fuente del Ticket en Email, seleccionar el tema de ayuda correspondiente, elegir el departamento TI y completar resumen, descripcion, prioridad y adjuntos antes de hacer clic en Abrir.",
-            "La prioridad P1 corresponde a una interrupcion total del ERP, del sistema de facturacion, de la red principal o de la operacion de picking y despacho. El tiempo objetivo de primera respuesta es 15 minutos y la actualizacion se realiza cada 30 minutos.",
-            "La prioridad P2 corresponde a una afectacion importante para caja, ventas, deposito o una sucursal completa, con primera respuesta en 1 hora. P3 corresponde a incidentes individuales con alternativa temporal, con respuesta en 4 horas habiles. P4 se usa para solicitudes planificadas, con respuesta en 1 dia habil.",
-            "La prioridad es validada por la Mesa de Ayuda. Marcar todos los casos como urgentes no acelera su atencion y puede dificultar la gestion de incidentes realmente criticos.",
+            "La prioridad P1 corresponde a una interrupcion total del ERP, del sistema de facturacion, de la red principal o de la operacion de picking y despacho. La prioridad P2 corresponde a una afectacion importante para caja, ventas, deposito o una sucursal completa. P3 se usa para incidentes individuales con alternativa temporal y P4 para solicitudes planificadas.",
+        ],
+    ),
+]
+
+TOOLS_SECTIONS = [
+    (
+        "1. Alcance del documento",
+        [
+            "Este documento complementa los casos operativos del soporte TI con procedimientos administrativos y tecnicos de uso interno. Sirve para consultar comandos, accesos de administracion y tareas puntuales del area.",
+            "Esta base esta pensada exclusivamente para analistas del Area de TI y no debe compartirse con usuarios finales.",
         ],
     ),
     (
-        "3. Contraseñas y cuentas",
+        "2. Consolas de administracion y reseteos",
         [
-            "Si una persona olvida la contraseña de su correo corporativo, debe abrir un ticket en la plataforma interna de TI. La solicitud debe indicar nombre del usuario, area, problema detectado y un medio alternativo de contacto. El restablecimiento no se gestiona por WhatsApp ni por pedido verbal.",
-            "Si una persona olvida la contraseña del sistema SGI, debe ingresar a la pantalla de acceso del sistema y seleccionar la opcion Olvide mi contrasena. El sistema enviara automaticamente por correo una contrasena temporal.",
-            "La contrasena temporal de SGI permite volver a ingresar al sistema. Al acceder con esa contrasena temporal, el sistema solicita obligatoriamente definir una nueva contrasena antes de continuar.",
-            "Si la persona no puede recibir el correo de recuperacion de SGI, debe abrir un ticket para revision del acceso o del correo asociado. El tecnico verificara identidad mediante nombre completo, numero de colaborador, CI y validacion con su responsable. Soporte nunca solicita la contraseña anterior.",
-            "Una cuenta se bloquea despues de cinco intentos fallidos. El bloqueo automatico dura 20 minutos. Si el acceso es urgente, la Mesa de Ayuda puede desbloquearla despues de validar la identidad.",
-            "Las contraseñas deben tener al menos 12 caracteres e incluir mayuscula, minuscula, numero y simbolo. No se permite reutilizar ninguna de las ultimas ocho contraseñas ni compartir credenciales.",
+            "Para restablecer la contraseña del correo corporativo, TI debe ingresar a https://admin.correo.distribuidoraadd.example/, ir a Usuarios, seleccionar Restablecer contraseña, asignar una contraseña generica y marcar que en el siguiente inicio de sesion el usuario deba cambiarla.",
+            "Para conectarse a Exchange Online desde PowerShell en una sesion de soporte, primero se debe permitir la ejecucion solo para esa sesion con Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force, luego forzar TLS 1.2, importar el modulo ExchangeOnlineManagement y finalmente ejecutar Connect-ExchangeOnline -UserPrincipalName soporte.ti@distribuidoraadd.example -DisableWAM.",
+            "Si se requiere reprovisionar VPN, TI puede ingresar a 198.51.100.252:4443 con credenciales de dominio del usuario y descargar el archivo .ovpn correspondiente.",
         ],
     ),
     (
-        "4. Solicitud de accesos",
+        "3. Equipos y sistema operativo",
         [
-            "El acceso a carpetas compartidas, impresoras de red, ERP, sistema de preventa o tableros de stock se solicita mediante el formulario de Accesos. Debe indicarse el recurso, el nivel requerido, la justificacion laboral y la fecha de finalizacion cuando sea temporal.",
-            "La solicitud requiere aprobacion del responsable directo y del propietario del proceso. Para modulos de tesoreria, costos o cuentas corrientes tambien se necesita aprobacion de Gerencia Administrativa. Soporte no concede accesos basandose solamente en un correo informal.",
-            "Los accesos temporales vencen en la fecha indicada. Las revisiones de permisos se realizan trimestralmente y los privilegios que ya no tengan justificacion son retirados.",
-        ],
-    ),
-    (
-        "5. Software y equipos",
-        [
-            "El software debe solicitarse al Area de TI. Solo pueden instalarse aplicaciones aprobadas y con licencia vigente. La persona usuaria no debe desactivar el antivirus ni utilizar instaladores descargados desde sitios no oficiales.",
-            "Las solicitudes de notebook, monitor, lector de codigo, impresora termica o accesorios requieren aprobacion del responsable del area. El plazo normal de preparacion es de tres dias habiles si existe stock. Todo equipo entregado queda asociado a la persona responsable en el inventario.",
-            "En caso de perdida o robo, se debe avisar inmediatamente a Seguridad, RRHH y a la Mesa de Ayuda. Soporte bloqueara la cuenta, revocara sesiones y activara el borrado remoto cuando el equipo lo permita. Tambien se debe realizar la denuncia correspondiente dentro de las 24 horas.",
-        ],
-    ),
-    (
-        "6. Conexion remota y VPN",
-        [
-            "La VPN corporativa se utiliza exclusivamente desde equipos administrados por Distribuidora ADD. Para conectarse, la persona debe abrir Sophos Connect e ingresar con su usuario de dominio en formato nombre.apellido y la misma contraseña con la que inicia sesion en su notebook.",
-            "Si la VPN no conecta, primero debe verificar Internet, confirmar que la fecha y hora del equipo sean correctas y reiniciar el cliente Sophos Connect. Si el error continua, debe registrar el codigo mostrado y abrir un ticket. No se deben instalar clientes VPN alternativos.",
-            "La sesion VPN se desconecta despues de 30 minutos de inactividad. Esta medida es automatica y no puede ser deshabilitada por la Mesa de Ayuda.",
-        ],
-    ),
-    (
-        "7. Correo y amenazas",
-        [
-            "Un correo sospechoso debe reportarse con el boton Reportar phishing de Outlook. No se debe responder, descargar adjuntos ni abrir enlaces. El equipo de TI analizara el mensaje y comunicara las medidas necesarias.",
-            "Si la persona ya ingreso sus credenciales en un sitio sospechoso, debe desconectar el equipo de la red, llamar inmediatamente a la Mesa de Ayuda y cambiar la contraseña desde otro dispositivo seguro.",
-            "Los archivos con informacion confidencial se comparten unicamente mediante los repositorios corporativos autorizados. No deben enviarse a cuentas personales ni almacenarse en servicios gratuitos de nube.",
-        ],
-    ),
-    (
-        "8. Escalamiento y cierre",
-        [
-            "Un ticket se escala al segundo nivel cuando requiere permisos especializados, cambios de infraestructura o cuando el procedimiento de primer nivel no resuelve el incidente. Los casos de seguridad se derivan de inmediato al equipo de Seguridad de la Informacion.",
-            "Antes de cerrar un ticket, Soporte registra la solucion y solicita confirmacion a la persona usuaria. Si no recibe respuesta, envia dos recordatorios en dias habiles distintos y cierra el caso al tercer dia habil. El ticket puede reabrirse durante los cinco dias posteriores.",
-            "La satisfaccion puede calificarse al finalizar el ticket. Las observaciones se revisan mensualmente para mejorar los procedimientos y detectar problemas recurrentes.",
-        ],
-    ),
-    (
-        "9. Guias rapidas para soporte TI",
-        [
-            "Si una persona indica que no funciona una carpeta compartida o no accede al sistema, primero se debe validar si esta fuera de la empresa o dentro de la red interna. Si esta fuera, verificar que se encuentre conectada a la VPN. Si esta dentro, verificar que tenga conexion a Internet.",
-            "Luego se debe ingresar a Panel de control, Conexiones, y revisar la configuracion de DNS de la interfaz activa. En la conexion por cable de red o en la de Wi-Fi, segun corresponda, la direccion DNS primaria debe ser 192.0.2.4 y como secundaria debe figurar 198.51.100.136 o 203.0.113.8.",
-            "Si una persona olvida la contraseña del correo, debe abrir un ticket y TI debe ingresar a https://admin.correo.distribuidoraadd.example/, ir a Usuarios, seleccionar Restablecer contraseña, asignar una contraseña generica y marcar que en el siguiente inicio de sesion el usuario deba cambiar su contraseña. Luego se responde el ticket con la contraseña temporal e indicando que el sistema le solicitara cambiarla.",
-            "Si una persona informa que no funciona la VPN, TI puede ingresar a 198.51.100.252:4443 con las credenciales de dominio del usuario, descargar el archivo .ovpn correspondiente y ejecutarlo en la notebook del usuario para volver a configurar la conexion.",
-            "Si una impresora no funciona, TI debe verificar la direccion IP de la impresora en el archivo Excel ubicado en la compartida de Informatica y probar conectividad con ping. Si la impresora responde, se puede desinstalar la impresora del equipo del usuario y volver a instalarla utilizando los drivers que se encuentran organizados por impresora en la compartida.",
             "Para verificar el numero de serie de una notebook desde PowerShell, se debe ejecutar el comando Get-WmiObject win32_bios | Select-Object SerialNumber. El resultado se utiliza para inventario, garantia o validacion del equipo.",
             "Si se necesita iniciar sesion en un equipo nuevo con cuenta local de Windows 11 durante la configuracion inicial, se debe abrir la consola con Shift + F10 y ejecutar start ms-cxh:localonly para habilitar el flujo de cuenta local.",
-            "Para conectarse a Exchange Online desde PowerShell en una sesion de soporte, primero se debe permitir la ejecucion solo para esa sesion con Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force, luego forzar TLS 1.2, importar el modulo ExchangeOnlineManagement y finalmente ejecutar Connect-ExchangeOnline -UserPrincipalName soporte.ti@distribuidoraadd.example -DisableWAM.",
             "Si se requiere renovar el periodo de gracia de Escritorio Remoto en un Windows Server, se debe abrir regedit como administrador y navegar hasta HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\RCM\\GracePeriod. Luego se elimina la clave que comienza con L$RTMTIMEBOMB y se intenta reiniciar el servicio con Restart-Service TermService -Force.",
-            "Para cambiar el fondo corporativo de toda la empresa, se debe revisar la GPO Fondo Corporativo 26 en el controlador de dominio de ejemplo 192.0.2.4, dentro de la administracion de directivas de grupo, siguiendo la ruta Configuracion de usuario, Preferencias y Configuracion de Windows.",
         ],
     ),
     (
-        "10. Preguntas frecuentes",
+        "4. Dominio, GPO y configuracion corporativa",
         [
-            "¿Puedo prestar mi cuenta a otra persona? No. Las cuentas son personales e intransferibles.",
-            "¿Soporte puede ver mi contraseña? No. Las contraseñas no son visibles para el personal tecnico y nunca se solicitan por telefono, correo o chat.",
-            "¿Puedo trabajar desde una computadora personal? Solo cuando exista autorizacion formal y se utilice el acceso web aprobado. La VPN no puede instalarse en equipos personales.",
-            "¿Donde consulto el estado de mi solicitud? En la seccion Mis tickets del portal, utilizando el numero recibido al crear el caso.",
+            "Para cambiar el fondo corporativo de toda la empresa, se debe revisar la GPO Fondo Corporativo 26 en el controlador de dominio de ejemplo 192.0.2.4, dentro de la administracion de directivas de grupo, siguiendo la ruta Configuracion de usuario, Preferencias y Configuracion de Windows.",
+            "Las modificaciones de politica corporativa deben registrarse y validarse en una ventana de cambio antes de aplicarse a toda la empresa.",
+            "Todo cambio con impacto masivo en dominio, correo, red o escritorio remoto debe quedar documentado en ticket y, si corresponde, en bitacora operativa del Area de TI.",
         ],
     ),
 ]
@@ -128,16 +123,16 @@ def footer(canvas, document) -> None:
     canvas.restoreState()
 
 
-def build_manual() -> None:
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+def build_pdf(output: Path, title: str, sections: list[tuple[str, list[str]]]) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(
-        str(OUTPUT),
+        str(output),
         pagesize=A4,
         rightMargin=2 * cm,
         leftMargin=2 * cm,
         topMargin=2 * cm,
         bottomMargin=2 * cm,
-        title="Procedimientos y Guias de Soporte TI - Distribuidora ADD",
+        title=title,
         author="Paulo Renato Preda",
     )
     styles = getSampleStyleSheet()
@@ -176,11 +171,11 @@ def build_manual() -> None:
 
     story = [
         Spacer(1, 4.5 * cm),
-        Paragraph("PROCEDIMIENTOS Y GUIAS DE SOPORTE TI", styles["CoverTitle"]),
+        Paragraph(title.upper(), styles["CoverTitle"]),
         Paragraph("Distribuidora ADD", styles["Heading2"]),
         Spacer(1, 0.8 * cm),
         Table(
-            [["Version", "1.0"], ["Vigencia", "Junio de 2026"], ["Clasificacion", "Uso interno demostrativo"]],
+            [["Version", "1.0"], ["Vigencia", "Julio de 2026"], ["Clasificacion", "Uso interno demostrativo"]],
             colWidths=[4 * cm, 7 * cm],
             style=TableStyle(
                 [
@@ -201,16 +196,22 @@ def build_manual() -> None:
         PageBreak(),
     ]
 
-    for index, (title, paragraphs) in enumerate(SECTIONS):
-        story.append(Paragraph(title, styles["SectionTitle"]))
+    for index, (section_title, paragraphs) in enumerate(sections):
+        story.append(Paragraph(section_title, styles["SectionTitle"]))
         for paragraph in paragraphs:
             story.append(Paragraph(paragraph, body))
-        if index < len(SECTIONS) - 1:
+        if index < len(sections) - 1:
             story.append(PageBreak())
 
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
 
 
+def build_manuals() -> None:
+    build_pdf(CASES_OUTPUT, "Casos Operativos de Soporte TI", CASES_SECTIONS)
+    build_pdf(TOOLS_OUTPUT, "Herramientas y Administracion TI", TOOLS_SECTIONS)
+
+
 if __name__ == "__main__":
-    build_manual()
-    print(f"PDF generado: {OUTPUT}")
+    build_manuals()
+    print(f"PDF generado: {CASES_OUTPUT}")
+    print(f"PDF generado: {TOOLS_OUTPUT}")
