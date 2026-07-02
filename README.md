@@ -132,21 +132,17 @@ docker run --rm -p 8501:8501 --env-file .env agente-soporte-ti
 
 **Respuesta esperada:** Soporte debe validar que exista una solicitud formal o ticket, restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion. Luego se responde el ticket con la contraseña temporal. [pagina 4]
 
-**Pregunta:** Nathaly dice que no funciona su impresora. ¿Que deberia revisar?
-
-**Respuesta esperada:** Primero se debe identificar la impresora correcta y verificar su direccion IP en el archivo Excel de la compartida de Informatica. Luego se debe hacer ping a la IP. Si responde, se puede desinstalar la impresora del equipo del usuario y volver a instalarla con los drivers organizados por impresora. [pagina 5]
-
-**Pregunta:** Un usuario no abre su carpeta compartida. ¿Que validaciones hago primero?
-
-**Respuesta esperada:** Primero se debe validar si el usuario esta fuera de la empresa o dentro de la red interna. Si esta fuera, verificar VPN. Si esta dentro, verificar Internet. Luego revisar la configuracion de DNS de la interfaz activa. [pagina 3]
-
 **Pregunta:** ¿Como verifico el numero de serie de una notebook?
 
 **Respuesta esperada:** Desde PowerShell se debe ejecutar el comando `Get-WmiObject win32_bios | Select-Object SerialNumber`. El resultado se utiliza para inventario, garantia o validacion del equipo. [pagina 3 del documento de herramientas]
 
-**Pregunta:** ¿Como conectarse a Exchange Online desde PowerShell?
+**Pregunta:** Un usuario no puede conectarse por VPN. ¿Que pasos sigo?
 
-**Respuesta esperada:** Se debe permitir la ejecucion para la sesion, forzar TLS 1.2, importar `ExchangeOnlineManagement` y luego ejecutar `Connect-ExchangeOnline` con una cuenta de soporte de ejemplo y la opcion `-DisableWAM`. [pagina 2 del documento de herramientas]
+**Respuesta esperada:** Primero se debe validar Internet, fecha y hora del equipo y reiniciar Sophos Connect. Si persiste, registrar el codigo de error, confirmar que el usuario utilice correctamente sus credenciales de dominio y, si hace falta, reprovisionar la configuracion VPN. [pagina 6]
+
+**Pregunta:** Un usuario se olvido la contraseña de su correo. ¿Cuales son los pasos?
+
+**Respuesta esperada:** Soporte debe validar que exista una solicitud formal o ticket, restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion. Luego se responde el ticket con la contraseña temporal. [pagina 4]
 
 **Pregunta fuera del documento:** ¿Cual es la clave del Wi-Fi de visitantes?
 
