@@ -128,7 +128,7 @@ docker run --rm -p 8501:8501 --env-file .env agente-soporte-ti
 
 ## Preguntas y respuestas
 
-**Pregunta:** Raquel se olvido su contraseña del correo. ¿Cuales son los pasos?
+**Pregunta:** Un usuario se olvido su contraseña del correo. ¿Cuales son los pasos?
 
 **Respuesta esperada:** Soporte debe validar que exista una solicitud formal o ticket, restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion. Luego se responde el ticket con la contraseña temporal. [pagina 4]
 
