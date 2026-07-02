@@ -71,8 +71,8 @@ flowchart TD
 ### Instalacion
 
 ```bash
-git clone URL_DEL_REPOSITORIO
-cd alura-agente-soporte-ti
+git clone https://github.com/Tatombore1/asistente-interno-ti-add.git
+cd asistente-interno-ti-add
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -150,7 +150,7 @@ docker run --rm -p 8501:8501 --env-file .env agente-soporte-ti
 
 ```bash
 pip install -r requirements-dev.txt
-pytest
+python -m pytest
 ```
 
 ## Seguridad
