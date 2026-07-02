@@ -215,3 +215,4 @@ if __name__ == "__main__":
     build_manuals()
     print(f"PDF generado: {CASES_OUTPUT}")
     print(f"PDF generado: {TOOLS_OUTPUT}")
+# Regenerar pdf's: ./.venv/bin/python scripts/generate_manual.py
