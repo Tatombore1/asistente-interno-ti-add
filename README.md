@@ -140,10 +140,6 @@ docker run --rm -p 8501:8501 --env-file .env agente-soporte-ti
 
 **Respuesta esperada:** Primero se debe validar Internet, fecha y hora del equipo y reiniciar Sophos Connect. Si persiste, registrar el codigo de error, confirmar que el usuario utilice correctamente sus credenciales de dominio y, si hace falta, reprovisionar la configuracion VPN. [pagina 6]
 
-**Pregunta:** Un usuario se olvido la contraseña de su correo. ¿Cuales son los pasos?
-
-**Respuesta esperada:** Soporte debe validar que exista una solicitud formal o ticket, restablecer la contraseña desde la consola administrativa, asignar una contraseña temporal y marcar que el usuario debe cambiarla en el siguiente inicio de sesion. Luego se responde el ticket con la contraseña temporal. [pagina 4]
-
 **Pregunta fuera del documento:** ¿Cual es la clave del Wi-Fi de visitantes?
 
 **Respuesta esperada:** Esa informacion no se encuentra documentada en los documentos cargados.
