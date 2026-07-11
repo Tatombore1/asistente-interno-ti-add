@@ -1,6 +1,6 @@
 # Asistente Interno de TI ADD
 
-Asistente inteligente orientado exclusivamente al equipo de soporte TI que responde preguntas en lenguaje natural usando como fuente de conocimiento documentos operativos internos de Distribuidora ADD. El proyecto fue desarrollado para el Challenge Alura Agente del programa ONE AI for Tech LATAM G10.
+Asistente inteligente orientado exclusivamente al equipo de soporte TI que responde preguntas en lenguaje natural usando como fuente de conocimiento procedimientos internos creados especificamente para Distribuidora ADD. El proyecto fue desarrollado para el Challenge Alura Agente del programa ONE AI for Tech LATAM G10.
 
 > Estado: primera version funcional. La evidencia y la URL publica de OCI se agregaran despues del despliegue.
 
@@ -9,6 +9,23 @@ Asistente inteligente orientado exclusivamente al equipo de soporte TI que respo
 En una importadora y distribuidora, el equipo de soporte TI suele recibir casos repetidos por chat, correo o ticket: un usuario no abre su carpeta compartida, no funciona una impresora, alguien olvido la contraseña del correo o no puede ingresar al SGI. Buscar los pasos correctos entre documentos extensos o mensajes viejos consume tiempo y genera respuestas inconsistentes.
 
 Este asistente centraliza ese conocimiento en una sola interfaz para que el analista de TI describa el caso y obtenga los pasos operativos documentados. El publico de la solucion es el Area de TI; no esta pensada como herramienta de autoservicio para usuarios finales.
+
+## Objetivo de la IA
+
+La IA fue pensada como apoyo interno para el trabajo diario del Area de TI de ADD. Su funcion no es atender directamente a usuarios finales, sino ayudar al personal de soporte cuando aparece un caso operativo concreto.
+
+Ejemplos de uso:
+
+- un usuario no puede conectarse por VPN
+- una impresora dejo de funcionar
+- alguien olvido la contraseña del correo
+- un equipo necesita validacion de numero de serie
+- soporte necesita recordar los pasos de un procedimiento administrativo o tecnico
+
+La base documental fue armada con procedimientos adaptados al contexto de ADD y separados en dos grupos:
+
+- casos operativos de soporte a usuarios
+- herramientas y tareas administrativas del Area de TI
 
 ## Arquitectura
 
@@ -71,21 +88,28 @@ flowchart TD
 - Python 3.12 o superior
 - Una API key de Cohere
 
-### Instalacion
+### Instalacion en Linux o macOS
 
 ```bash
 git clone https://github.com/Tatombore1/asistente-interno-ti-add.git
 cd asistente-interno-ti-add
-python -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-En Windows, la activacion del entorno virtual se realiza con:
+### Instalacion en Windows
 
 ```powershell
+git clone https://github.com/Tatombore1/asistente-interno-ti-add.git
+cd asistente-interno-ti-add
+py -3.12 -m venv .venv
 .venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+copy .env.example .env
 ```
 
 Edita `.env` y agrega la API key:
@@ -96,10 +120,30 @@ COHERE_API_KEY=tu_api_key
 
 No publiques el archivo `.env`: ya esta excluido mediante `.gitignore`.
 
-Inicia la aplicacion:
+### Verificacion rapida del entorno
+
+Una vez activado el entorno virtual, conviene validar que la otra PC este usando el Python correcto:
 
 ```bash
-streamlit run app.py
+python --version
+which python
+```
+
+En Windows se puede usar:
+
+```powershell
+python --version
+where python
+```
+
+La ruta debe apuntar al entorno virtual del proyecto, por ejemplo `.venv/bin/python` o `.venv\Scripts\python.exe`.
+
+### Inicio de la aplicacion
+
+Inicia la aplicacion con el Python del entorno virtual:
+
+```bash
+python -m streamlit run app.py
 ```
 
 Luego abre `http://localhost:8501`.
@@ -147,9 +191,11 @@ docker run --rm -p 8501:8501 --env-file .env agente-soporte-ti
 ## Pruebas
 
 ```bash
-pip install -r requirements-dev.txt
+python -m pip install -r requirements-dev.txt
 python -m pytest
 ```
+
+Estas pruebas deben ejecutarse dentro del entorno virtual activado.
 
 ## Seguridad
 
