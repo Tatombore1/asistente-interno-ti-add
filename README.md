@@ -2,7 +2,7 @@
 
 Asistente inteligente orientado exclusivamente al equipo de soporte TI que responde preguntas en lenguaje natural usando como fuente de conocimiento procedimientos internos creados especificamente para Distribuidora ADD. El proyecto fue desarrollado para el Challenge Alura Agente del programa ONE AI for Tech LATAM G10.
 
-> Estado: primera version funcional. La evidencia y la URL publica de OCI se agregaran despues del despliegue.
+> Estado: version funcional desplegada en OCI Compute.
 
 ## Problema
 
@@ -68,6 +68,7 @@ flowchart TD
 │   ├── casos_operativos_soporte_ti_add.pdf
 │   ├── herramientas_y_administracion_ti_add.pdf
 │   └── uploads/
+├── docs/
 ├── scripts/
 │   └── generate_manual.py
 ├── src/
@@ -207,11 +208,26 @@ Estas pruebas deben ejecutarse dentro del entorno virtual activado.
 
 ## Despliegue en OCI
 
-La aplicacion esta preparada para ejecutarse en una instancia de OCI Compute mediante Docker. Para publicarla se debe clonar el repositorio en la instancia, crear el archivo `.env`, construir la imagen y habilitar el puerto TCP 8501 en el Network Security Group y en el firewall del sistema operativo.
+La aplicacion fue desplegada en Oracle Cloud Infrastructure utilizando una instancia `Compute Always Free`. En el servidor se clono el repositorio, se creo el entorno virtual, se configuraron las variables de entorno y Streamlit quedo publicado como servicio `systemd` para que el asistente inicie automaticamente y siga disponible aunque se cierre la sesion SSH.
 
-**URL publica:** pendiente de despliegue.
+### Aplicacion publica
 
-**Evidencia:** pendiente de despliegue.
+[Acceder al Agente Interno de TI ADD](http://147.15.80.48:8501)
+
+### Evidencia del despliegue
+
+![Pantalla principal del Agente Interno de TI ADD en OCI](docs/pregunta1agente.png)
+
+![Consulta resuelta por el Agente Interno de TI ADD en OCI](docs/pregunta2agente.png)
+
+### Infraestructura utilizada
+
+- Oracle Cloud Infrastructure Compute
+- Shape `VM.Standard.A1.Flex`
+- Ubuntu 24.04 ARM64
+- Python 3.12
+- Streamlit ejecutado como servicio `systemd`
+- Puerto publico TCP `8501`
 
 ## Autor
 
